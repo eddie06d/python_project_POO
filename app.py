@@ -79,6 +79,7 @@ while True:
     # capturar la opción del usuario
     opt: str = input("Ingrese una opción: ")
     print("*"*55)
+    print("\n")
     # validar si la opción ingresada es un valor numérico
     if opt.isnumeric():
         # convertir la opción a entero
@@ -126,3 +127,4 @@ while True:
                 break
     else:
         print("Por favor ingrese un valor numérico, intente nuevamente")
+    print("\n")
