@@ -48,10 +48,7 @@ sorted_flights_by_number_seats: List[FlightDetail] = sorted(list_detail_flights,
 sorted_flights_by_total_sales: List[FlightDetail] = sorted(list_detail_flights, key=lambda x: x.total_economic_seat_sales + x.total_premium_seat_sales, reverse=True)
 
 # lista de aviones ordenada por cantidad de pasajes vendidos
-planes_higher_passengers: List[Dict[str, int]] = [{ "code": plane_code, "quantity": quantity } for plane_code, quantity in quantity_tickets_by_plane.items() if quantity == max(quantity_tickets_by_plane.values())]
-
-# dar formato a la lista de aviones ordenada por cantidad de pasajes vendidos
-format_higher_passengers: str = ", ".join([f"{plane['code']} ({plane['quantity']})" for plane in planes_higher_passengers])
+planes_higher_passengers: List[str] = [plane_code for plane_code, quantity in quantity_tickets_by_plane.items() if quantity == max(quantity_tickets_by_plane.values())]
 
 # función para mostrar el menú de opciones
 def show_menu() -> (None):
@@ -121,7 +118,7 @@ while True:
                 print(f"Vuelo con la mayor cantidad de pasajeros: {sorted_flights_by_number_seats[-1].code} ({sorted_flights_by_number_seats[-1].number_economic_seats + sorted_flights_by_number_seats[-1].number_premium_seats})")
                 print(f"Vuelo con la menor cantidad de pasajeros: {sorted_flights_by_number_seats[0].code} ({sorted_flights_by_number_seats[0].number_economic_seats + sorted_flights_by_number_seats[0].number_premium_seats})")
                 print(f"Tres primeros vuelos con mayores ingresos por la venta de asientos: \n{', '.join([f'{x.code} ({get_currency_format(CURRENCY_SYMBOL, x.total)})' for x in sorted_flights_by_total_sales[:3]])}")
-                print(f"Avión que transportó la mayor cantidad de pasajeros: {format_higher_passengers}")
+                print(f"Avión que transportó la mayor cantidad de pasajeros: {', '.join(planes_higher_passengers)}")
             else:
                 print("Gracias por utilizar el programa, hasta luego")
                 break
